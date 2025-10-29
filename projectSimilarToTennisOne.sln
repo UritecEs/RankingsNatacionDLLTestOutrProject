@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36623.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "projectSimilarToTennisOne", "projectSimilarToTennisOne\", "{9FEB73B5-B69B-8185-9815-D616E3145F0B}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7"
+		ProjectReferences = "{08d9fb56-675e-427e-8bcd-1767b341a1bd}|testDLLrecordsNatacion.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_64641"
+		Debug.AspNetCompiler.PhysicalPath = "projectSimilarToTennisOne\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64641\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_64641"
+		Release.AspNetCompiler.PhysicalPath = "projectSimilarToTennisOne\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64641\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "64641"
+		SlnRelativePath = "projectSimilarToTennisOne\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testDLLrecordsNatacion", "..\testDLLrecordsNatacion\testDLLrecordsNatacion\testDLLrecordsNatacion.csproj", "{08D9FB56-675E-427E-8BCD-1767B341A1BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9FEB73B5-B69B-8185-9815-D616E3145F0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FEB73B5-B69B-8185-9815-D616E3145F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FEB73B5-B69B-8185-9815-D616E3145F0B}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FEB73B5-B69B-8185-9815-D616E3145F0B}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{08D9FB56-675E-427E-8BCD-1767B341A1BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08D9FB56-675E-427E-8BCD-1767B341A1BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08D9FB56-675E-427E-8BCD-1767B341A1BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08D9FB56-675E-427E-8BCD-1767B341A1BD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0BA8A9CB-56A8-4A8C-AC56-0ED93273FA0C}
+	EndGlobalSection
+EndGlobal
