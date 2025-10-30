@@ -27,7 +27,51 @@ public partial class _Default : Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        List<Athlete> allAthletes = dllXmlProcesser.ProcessXmlFiles(codeOfClub);
 
+        // Generate rows and cells.           
+        foreach (Athlete athlete in allAthletes)
+        {
+            TableRow row = new TableRow();
+
+            TableCell id = new TableCell();
+            id.Controls.Add(new LiteralControl(athlete.Id.ToString()));
+            row.Cells.Add(id);
+
+            TableCell fullName = new TableCell();
+            fullName.Controls.Add(new LiteralControl(athlete.FullName));
+            row.Cells.Add(fullName);
+
+            TableCell birthdate = new TableCell();
+            birthdate.Controls.Add(new LiteralControl(athlete.Birthdate.ToString()));
+            row.Cells.Add(birthdate);
+
+            TableCell gender = new TableCell();
+            gender.Controls.Add(new LiteralControl(athlete.Gender));
+            row.Cells.Add(gender);
+
+            TableCell nation = new TableCell();
+            nation.Controls.Add(new LiteralControl(athlete.Nation));
+            row.Cells.Add(nation);
+
+            TableCell license = new TableCell();
+            license.Controls.Add(new LiteralControl(athlete.License));
+            row.Cells.Add(license);
+
+            TableCell clubcode = new TableCell();
+            clubcode.Controls.Add(new LiteralControl(athlete.ClubCode.ToString()));
+            row.Cells.Add(clubcode);
+
+            TableCell clubname = new TableCell();
+            clubname.Controls.Add(new LiteralControl(athlete.ClubName));
+            row.Cells.Add(clubname);
+
+            TableCell clubshortname = new TableCell();
+            clubshortname.Controls.Add(new LiteralControl(athlete.ClubShortName));
+            row.Cells.Add(clubshortname);
+
+            Table1.Rows.Add(row);
+        }
     }
 
     /// <summary>
@@ -36,9 +80,51 @@ public partial class _Default : Page
     /// </summary>
     public void testInsert_Click(object sender, EventArgs args)
     {
-        List<Athlete> allAthletes = dllXmlProcesser.ProcessXmlFiles(codeOfClub);
-        TextBox1.TextMode = TextBoxMode.MultiLine;
-        TextBox1.Text = JsonConvert.SerializeObject(allAthletes, Formatting.Indented); ;
+        /*List<Athlete> allAthletes = dllXmlProcesser.ProcessXmlFiles(codeOfClub);
+
+        // Generate rows and cells.           
+        foreach (Athlete athlete in allAthletes)
+        {
+            TableRow row = new TableRow();
+
+            TableCell id = new TableCell();
+            id.Controls.Add(new LiteralControl(athlete.Id.ToString()));
+            row.Cells.Add(id);
+
+            TableCell fullName = new TableCell();
+            fullName.Controls.Add(new LiteralControl(athlete.FullName));
+            row.Cells.Add(fullName);
+
+            TableCell birthdate = new TableCell();
+            birthdate.Controls.Add(new LiteralControl(athlete.Birthdate.ToString()));
+            row.Cells.Add(birthdate);
+
+            TableCell gender = new TableCell();
+            gender.Controls.Add(new LiteralControl(athlete.Gender));
+            row.Cells.Add(gender);
+
+            TableCell nation = new TableCell();
+            nation.Controls.Add(new LiteralControl(athlete.Nation));
+            row.Cells.Add(nation);
+
+            TableCell license = new TableCell();
+            license.Controls.Add(new LiteralControl(athlete.License));
+            row.Cells.Add(license);
+
+            TableCell clubcode = new TableCell();
+            clubcode.Controls.Add(new LiteralControl(athlete.ClubCode.ToString()));
+            row.Cells.Add(clubcode);
+
+            TableCell clubname = new TableCell();
+            clubname.Controls.Add(new LiteralControl(athlete.ClubName));
+            row.Cells.Add(clubname);
+
+            TableCell clubshortname = new TableCell();
+            clubshortname.Controls.Add(new LiteralControl(athlete.ClubShortName));
+            row.Cells.Add(clubshortname);
+
+            Table1.Rows.Add(row);
+        }*/
     }
 
     /// <summary>

@@ -5,6 +5,20 @@
     <h1>TEST TO DISPLAY INFORMATION</h1>
 
     <asp:button id="Button1" onclick="testInsert_Click" runat="server" Text="Procesar XML"></asp:button>
-    <asp:TextBox Width="1500" Height="600" id="TextBox1" runat="server" TextMode="MultiLine">[Atletas del club de tenis de Pamplona que aparecen en el XML]</asp:TextBox>
-
+    <div>
+        <label style="font-weight:bold;font-size:large">All athletes:</label>
+         <asp:Table id="Table1" runat="server" CellPadding="10" GridLines="both" HorizontalAlign="Justify" Width="100%">
+             <asp:TableRow Font-Bold="true">
+                <asp:TableCell>ID</asp:TableCell>
+                <asp:TableCell>FullName</asp:TableCell>
+                <asp:TableCell>Birthdate</asp:TableCell>
+                <asp:TableCell>Gender</asp:TableCell>
+                <asp:TableCell>Nation</asp:TableCell>
+                <asp:TableCell>License</asp:TableCell>
+                <asp:TableCell>ClubCode</asp:TableCell>
+                <asp:TableCell>ClubName</asp:TableCell>
+                <asp:TableCell>ClubShortName</asp:TableCell>
+            </asp:TableRow>
+        </asp:Table>
+    </div>
 </asp:Content>

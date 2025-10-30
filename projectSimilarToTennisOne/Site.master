@@ -49,8 +49,8 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/Athletes">Atletas</a></li>
-                        <li><a runat="server" href="~/Meets">Competiciones</a></li>
-                        <li><a runat="server" href="~/Records">Records</a></li>
+                        <!-- <li><a runat="server" href="~/Meets">Competiciones</a></li>
+                        <li><a runat="server" href="~/Records">Records</a></li> -->
                     </ul>
                 </div>
             </div>
