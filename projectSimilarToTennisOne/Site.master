@@ -50,11 +50,6 @@
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/Athletes">Atletas</a></li>
                         <li><a runat="server" href="~/Meets">Competiciones</a></li>
-                         <ul class="nav navbar-nav">
-                             <li><a runat="server" href="~/Meets/Meets">Atletas</a></li>
-                             <li><a runat="server" href="~/Competitions">Competiciones</a></li>
-                             <li><a runat="server" href="~/Records">Records</a></li>
-                         </ul>
                         <li><a runat="server" href="~/Records">Records</a></li>
                     </ul>
                 </div>
