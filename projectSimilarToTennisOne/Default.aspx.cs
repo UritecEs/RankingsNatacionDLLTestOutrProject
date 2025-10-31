@@ -1,77 +1,24 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Activities.Expressions;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Globalization;
+using System.Data;
 using System.Linq;
-using System.Reflection;
-using System.Web;
-using System.Web.Providers.Entities;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Xml;
-using System.Xml.Linq;
 using testDLLrecordsNatacion;
-using testDLLrecordsNatacion.Model;
 using testDLLrecordsNatacion.Model.Entities;
-using WebGrease.Css.Extensions;
-using Formatting = Newtonsoft.Json.Formatting;
 
 
 public partial class _Default : Page
 {
-    private LenexXmlProcesser dllXmlProcesser = new LenexXmlProcesser();
-    private readonly string codeOfClub = "00300"; //ex.Tenis club Pamplona --> replace depending on the client where this DLL is implemented
 
+    private readonly string codeOfClub = "00300"; //ex.Tenis club Pamplona --> replace depending on the client where this DLL is implemented
+    private DataProcesser backend = new DataProcesser();
+
+    #region view control Events and function callers
     protected void Page_Load(object sender, EventArgs e)
     {
-        List<Athlete> allAthletes = dllXmlProcesser.ProcessXmlFiles(codeOfClub);
-
-        // Generate rows and cells.           
-        foreach (Athlete athlete in allAthletes)
-        {
-            TableRow row = new TableRow();
-
-            TableCell id = new TableCell();
-            id.Controls.Add(new LiteralControl(athlete.Id.ToString()));
-            row.Cells.Add(id);
-
-            TableCell fullName = new TableCell();
-            fullName.Controls.Add(new LiteralControl(athlete.FullName));
-            row.Cells.Add(fullName);
-
-            TableCell birthdate = new TableCell();
-            birthdate.Controls.Add(new LiteralControl(athlete.Birthdate.ToString()));
-            row.Cells.Add(birthdate);
-
-            TableCell gender = new TableCell();
-            gender.Controls.Add(new LiteralControl(athlete.Gender));
-            row.Cells.Add(gender);
-
-            TableCell nation = new TableCell();
-            nation.Controls.Add(new LiteralControl(athlete.Nation));
-            row.Cells.Add(nation);
-
-            TableCell license = new TableCell();
-            license.Controls.Add(new LiteralControl(athlete.License));
-            row.Cells.Add(license);
-
-            TableCell clubcode = new TableCell();
-            clubcode.Controls.Add(new LiteralControl(athlete.ClubCode.ToString()));
-            row.Cells.Add(clubcode);
-
-            TableCell clubname = new TableCell();
-            clubname.Controls.Add(new LiteralControl(athlete.ClubName));
-            row.Cells.Add(clubname);
-
-            TableCell clubshortname = new TableCell();
-            clubshortname.Controls.Add(new LiteralControl(athlete.ClubShortName));
-            row.Cells.Add(clubshortname);
-
-            Table1.Rows.Add(row);
-        }
+        backend.ProcessXml(codeOfClub);
+        LoadTablesData();
     }
 
     /// <summary>
@@ -80,51 +27,7 @@ public partial class _Default : Page
     /// </summary>
     public void testInsert_Click(object sender, EventArgs args)
     {
-        /*List<Athlete> allAthletes = dllXmlProcesser.ProcessXmlFiles(codeOfClub);
-
-        // Generate rows and cells.           
-        foreach (Athlete athlete in allAthletes)
-        {
-            TableRow row = new TableRow();
-
-            TableCell id = new TableCell();
-            id.Controls.Add(new LiteralControl(athlete.Id.ToString()));
-            row.Cells.Add(id);
-
-            TableCell fullName = new TableCell();
-            fullName.Controls.Add(new LiteralControl(athlete.FullName));
-            row.Cells.Add(fullName);
-
-            TableCell birthdate = new TableCell();
-            birthdate.Controls.Add(new LiteralControl(athlete.Birthdate.ToString()));
-            row.Cells.Add(birthdate);
-
-            TableCell gender = new TableCell();
-            gender.Controls.Add(new LiteralControl(athlete.Gender));
-            row.Cells.Add(gender);
-
-            TableCell nation = new TableCell();
-            nation.Controls.Add(new LiteralControl(athlete.Nation));
-            row.Cells.Add(nation);
-
-            TableCell license = new TableCell();
-            license.Controls.Add(new LiteralControl(athlete.License));
-            row.Cells.Add(license);
-
-            TableCell clubcode = new TableCell();
-            clubcode.Controls.Add(new LiteralControl(athlete.ClubCode.ToString()));
-            row.Cells.Add(clubcode);
-
-            TableCell clubname = new TableCell();
-            clubname.Controls.Add(new LiteralControl(athlete.ClubName));
-            row.Cells.Add(clubname);
-
-            TableCell clubshortname = new TableCell();
-            clubshortname.Controls.Add(new LiteralControl(athlete.ClubShortName));
-            row.Cells.Add(clubshortname);
-
-            Table1.Rows.Add(row);
-        }*/
+        Page_Load(sender, args);
     }
 
     /// <summary>
@@ -135,5 +38,116 @@ public partial class _Default : Page
     {
         //TODO
     }
+    #endregion
+
+    #region Other view-related functions
+    private void LoadTablesData()
+    {
+        Dictionary<string, object> allData = backend.FetchAllData();
+        List<Athlete> allAthletes = (dynamic) allData["Athletes"];
+        List<Event> allEvents = (dynamic) allData["Events"];
+        List<Result> allResults = (dynamic) allData["Results"];
+
+        //Generate tables
+        foreach (Athlete athlete in allAthletes)
+        {
+            TableRow row = GenerateTableRowFromAthlete(athlete);
+            AthletesTable.Rows.Add(row);
+        }         
+        foreach (Event evento in allEvents)
+        {
+            TableRow row = GenerateTableRowFromEvent(evento);
+            EventsTable.Rows.Add(row);
+        }
+        foreach (Result result in allResults)
+        {
+            TableRow row = GenerateTableRowFromResult(result);
+            ResultsTable.Rows.Add(row);
+        }
+
+    }
+
+
+    /// <summary>
+    /// Generates a table row object to display all the object's attributes values 
+    /// in different cells, corresponding to the columns of the table 
+    /// </summary>
+    /// <param name="athlete">The Athlete that we want to describe the properties of</param>
+    /// <returns>TableRow with the described object data</returns>
+    private TableRow GenerateTableRowFromAthlete(Athlete athlete)
+    {
+        TableRow row = new TableRow();
+        row.ID = $"row_{athlete.Id}";
+
+        Dictionary<string, string> properties = athlete.DescribePropertiesFormattedStr();
+        for (int i = 0; i < properties.Count; i++)
+        {
+            var att = properties.ElementAt(i);
+            string attName = att.Key;
+            string attValue = att.Value;
+
+            TableCell propertyCell = new TableCell();
+            propertyCell.ID = $"cell_{attName}_{athlete.Id}";
+            propertyCell.Controls.Add(new LiteralControl(attValue));
+            row.Cells.Add(propertyCell);
+        }
+
+        return row;
+    }
+
+    /// <summary>
+    /// Generates a table row object to display all the object's attributes values 
+    /// in different cells, corresponding to the columns of the table 
+    /// </summary>
+    /// <param name="evento">The Event that we want to describe the properties of</param>
+    /// <returns>TableRow with the described object data</returns>
+    private TableRow GenerateTableRowFromEvent(Event evento)
+    {
+        TableRow row = new TableRow();
+        row.ID = $"row_{evento.Id}";
+
+        Dictionary<string, string> properties = evento.DescribePropertiesFormattedStr();
+        for (int i = 0; i < properties.Count; i++)
+        {
+            var att = properties.ElementAt(i);
+            string attName = att.Key;
+            string attValue = att.Value;
+
+            TableCell propertyCell = new TableCell();
+            propertyCell.ID = $"cell_{attName}_{evento.Id}";
+            propertyCell.Controls.Add(new LiteralControl(attValue));
+            row.Cells.Add(propertyCell);
+        }
+
+        return row;
+    }
+
+    /// <summary>
+    /// Generates a table row object to display all the object's attributes values 
+    /// in different cells, corresponding to the columns of the table 
+    /// </summary>
+    /// <param name="result">The Result that we want to describe the properties of</param>
+    /// <returns>TableRow with the described object data</returns>
+    private TableRow GenerateTableRowFromResult(Result result)
+    {
+        TableRow row = new TableRow();
+        row.ID = $"row_{result.Id}";
+
+        Dictionary<string, string> properties = result.DescribePropertiesStr();
+        for (int i = 0; i < properties.Count; i++)
+        {
+            var att = properties.ElementAt(i);
+            string attName = att.Key;
+            string attValue = att.Value;
+
+            TableCell propertyCell = new TableCell();
+            propertyCell.ID = $"cell_{attName}_{result.Id}";
+            propertyCell.Controls.Add(new LiteralControl(attValue));
+            row.Cells.Add(propertyCell);
+        }
+
+        return row;
+    }
+    #endregion
 
 }

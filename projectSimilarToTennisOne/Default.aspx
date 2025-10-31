@@ -5,20 +5,61 @@
     <h1>TEST TO DISPLAY INFORMATION</h1>
 
     <asp:button id="Button1" onclick="testInsert_Click" runat="server" Text="Procesar XML"></asp:button>
+
     <div>
-        <label style="font-weight:bold;font-size:large">All athletes:</label>
-         <asp:Table id="Table1" runat="server" CellPadding="10" GridLines="both" HorizontalAlign="Justify" Width="100%">
+        <label style="font-weight:bold;font-size:large">Atletas</label>
+         <asp:Table id="AthletesTable" runat="server" CellPadding="10" GridLines="both" HorizontalAlign="Justify" Width="100%">
              <asp:TableRow Font-Bold="true">
-                <asp:TableCell>ID</asp:TableCell>
-                <asp:TableCell>FullName</asp:TableCell>
-                <asp:TableCell>Birthdate</asp:TableCell>
-                <asp:TableCell>Gender</asp:TableCell>
-                <asp:TableCell>Nation</asp:TableCell>
-                <asp:TableCell>License</asp:TableCell>
-                <asp:TableCell>ClubCode</asp:TableCell>
-                <asp:TableCell>ClubName</asp:TableCell>
-                <asp:TableCell>ClubShortName</asp:TableCell>
+                <asp:TableCell name="FullName">Nombre Completo</asp:TableCell>
+                <asp:TableCell name="Birthdate">Fecha de Nacimiento</asp:TableCell>
+                <asp:TableCell name="Gender">Género</asp:TableCell>
+                <asp:TableCell name="Nation">País</asp:TableCell>
+                <asp:TableCell name="License">Licencia</asp:TableCell>
+                <asp:TableCell name="ClubCode">Código del club</asp:TableCell>
+                <asp:TableCell name="ClubName">Nombre del club</asp:TableCell>
+                <asp:TableCell name="ClubShortName">Abreviatura del club</asp:TableCell>
             </asp:TableRow>
         </asp:Table>
     </div>
+
+     <div>
+         <label style="font-weight:bold;font-size:large">Eventos</label>
+          <asp:Table id="EventsTable" runat="server" CellPadding="10" GridLines="both" HorizontalAlign="Justify" Width="100%">
+              <asp:TableRow Font-Bold="true">
+                 <asp:TableCell name="MeetName">Competición</asp:TableCell>
+                 <asp:TableCell name="MeetDate">Fecha</asp:TableCell>
+                 <asp:TableCell name="Nation">País</asp:TableCell>
+                 <asp:TableCell name="City">Ciudad</asp:TableCell>
+                 <asp:TableCell name="Status">Clasificación</asp:TableCell>
+                 <asp:TableCell name="PoolLength">Longitud de la piscina</asp:TableCell>
+                 <asp:TableCell name="SessionNum">Nº Sesión</asp:TableCell>
+                 <asp:TableCell name="SessionName">Sesión</asp:TableCell>
+                 <asp:TableCell name="GenderCategory">Categoría de Género</asp:TableCell>
+                 <asp:TableCell name="EventRound">Ronda del Evento</asp:TableCell>
+                 <asp:TableCell name="EventCourse">Recorrido de nado</asp:TableCell>
+                 <asp:TableCell name="SwimDistance">Distancia de nado</asp:TableCell>
+                 <asp:TableCell name="SwimStroke">Estilo de nado</asp:TableCell>
+                 <asp:TableCell name="SwimRelayCount">Cantidad de relevos</asp:TableCell>
+             </asp:TableRow>
+         </asp:Table>
+     </div>
+
+     <div>
+     <label style="font-weight:bold;font-size:large">Resultados de pruebas</label>
+      <asp:Table id="ResultsTable" runat="server" CellPadding="10" GridLines="both" HorizontalAlign="Justify" Width="100%">
+          <asp:TableRow Font-Bold="true">
+             <asp:TableCell name="SplitDistance">Distancia recorrida</asp:TableCell>
+             <asp:TableCell name="SwimTime">Tiempo</asp:TableCell>
+             <asp:TableCell name="Points">Puntos</asp:TableCell>
+             <asp:TableCell name="IsWaScoring">Evaluación según FINA?</asp:TableCell>
+             <asp:TableCell name="EntryTime">Tiempo de entrada</asp:TableCell>
+             <asp:TableCell name="Comment">Anotación</asp:TableCell>
+             <asp:TableCell name="AgeGroupMaxAge">Edad máxima del evento</asp:TableCell>
+             <asp:TableCell name="AgeGroupMinAge">Edad mínima del evento</asp:TableCell>
+             <asp:TableCell name="EventId">Id del evento</asp:TableCell>
+             <asp:TableCell name="AthleteId">Id del atleta</asp:TableCell>
+         </asp:TableRow>
+     </asp:Table>
+ </div>
+
 </asp:Content>
