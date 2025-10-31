@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /projectSimilarToTennisOne/Log_debugInfo.txt
 /projectSimilarToTennisOne/Log_warnErrorFatal.txt
+/projectSimilarToTennisOne/Logs/Log_warnErrorFatal.txt
+/projectSimilarToTennisOne/Logs/Log_debugInfo.txt
