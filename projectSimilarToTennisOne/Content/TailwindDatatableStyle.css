@@ -3,7 +3,7 @@
    Documentation: https://datatables.net/examples/styling/tailwind.html
 */
 
-:root {
+/*:root {
     --dt-row-selected: 13, 110, 253;
     --dt-row-selected-text: 255, 255, 255;
     --dt-row-selected-link: 228, 228, 228;
@@ -227,4 +227,4 @@ div.dt-scroll-body > table.dataTable > thead > tr > td {
 :root[data-bs-theme=dark] table.dataTable thead > tr > td.dt-orderable-asc:hover,
 :root[data-bs-theme=dark] table.dataTable thead > tr > td.dt-orderable-desc:hover {
     outline: 2px solid rgba(255, 255, 255, 0.05);
-}
+}*/

@@ -76,9 +76,9 @@ public partial class _Default : Page
     /// <param name="table"></param>
     private void ResetTable(Table table)
     {
-        TableRow headersRow = table.Rows[0];
-        table.Rows.Clear();
-        table.Rows.Add(headersRow);
+        //TableRow headersRow = table.Rows[0];
+        //table.Rows.Clear();
+        //table.Rows.Add(headersRow);
     }
 
     /// <summary>

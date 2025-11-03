@@ -30,3 +30,16 @@ textarea {
 
 
 /*Tables css*/
+/*table .dataTable > tbody {
+    background-color: red;
+    max-height: 100px;
+    overflow-y: auto;*/
+    /*    width: 200px;*/
+/*}
+.dataTable > tbody > tr:nth-of-type(odd) {
+    background-color: #dddddd;
+}*/
+.table-scrollable {
+    overflow-y: auto;
+    height: 300px;
+}
