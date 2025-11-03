@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -48,6 +47,10 @@ public partial class _Default : Page
         List<Event> allEvents = (dynamic) allData["Events"];
         List<Result> allResults = (dynamic) allData["Results"];
 
+        ResetTable(AthletesTable);
+        ResetTable(EventsTable);
+        ResetTable(ResultsTable);
+ 
         //Generate tables
         foreach (Athlete athlete in allAthletes)
         {
@@ -67,6 +70,16 @@ public partial class _Default : Page
 
     }
 
+    /// <summary>
+    /// Removes all of the rows of a table except for the headers
+    /// </summary>
+    /// <param name="table"></param>
+    private void ResetTable(Table table)
+    {
+        TableRow headersRow = table.Rows[0];
+        table.Rows.Clear();
+        table.Rows.Add(headersRow);
+    }
 
     /// <summary>
     /// Generates a table row object to display all the object's attributes values 
