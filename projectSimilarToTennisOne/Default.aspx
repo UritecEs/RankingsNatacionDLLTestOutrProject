@@ -12,6 +12,32 @@
         <asp:button id="Button1" onclick="testInsert_Click" runat="server" Text="Procesar XML"></asp:button>
     </div>
 
+    <div style="margin-bottom:20px;">
+        
+        <div>
+            <asp:FileUpload id="ExcelFileUpload" runat="server" />
+            <asp:button id="ImportExcelbtn" onclick="ImportExcel_Click" runat="server" Text="Importar datos Excel"></asp:button>
+            <asp:Label id="UploadStatusLabel" runat="server"></asp:Label>   
+        </div>
+
+        <label style="font-weight:bold;font-size:large">Mejores tiempos</label>
+        <div style="overflow-y: auto; max-height: 300px; width: 100%; margin-bottom:20px;">
+            <asp:Table id="RecordsTable" class="table table-striped" runat="server" CellPadding="10" GridLines="both" 
+                HorizontalAlign="Justify" Width="100%">
+                <asp:TableHeaderRow class="thead">
+                    <asp:TableHeaderCell name="Posicion">Posición</asp:TableHeaderCell>
+                    <asp:TableHeaderCell name="MeetStatus">Caracter</asp:TableHeaderCell>
+                    <asp:TableHeaderCell name="RecordType">Tipo de record</asp:TableHeaderCell>
+                    <asp:TableHeaderCell name="AgeCategory">Categoría de edad</asp:TableHeaderCell>
+                    <asp:TableHeaderCell name="SwimTime">Tiempo de nado</asp:TableHeaderCell>
+                    <asp:TableHeaderCell name="SwimCourse">Recorrido de nado</asp:TableHeaderCell>
+                    <asp:TableHeaderCell name="SwimDistance">Distancia de nado</asp:TableHeaderCell>
+                    <asp:TableHeaderCell name="Points">Puntos (FINA)</asp:TableHeaderCell>
+                </asp:TableHeaderRow>
+            </asp:Table>
+        </div>
+    </div>
+
     <label style="font-weight:bold;font-size:large">Atletas</label>
     <div style="overflow-y: auto; max-height: 300px; width: 100%; margin-bottom:20px;">
          <asp:Table id="AthletesTable" class="table table-striped" runat="server" CellPadding="10" GridLines="both" 

@@ -33,10 +33,47 @@ public partial class _Default : Page
     /// called when the "PROCESAR EXCEL" button is pressed.
     /// Reads xml and inserts the info of the atletes that belong to the club requesting the info
     /// </summary>
-    public void testInsertExcel_Click(object sender, EventArgs args)
+    public void ImportExcel_Click(object sender, EventArgs args)
     {
-        //TODO
+        string tempResourcesFolderPath = "C:\\Users\\crist\\source\\repos\\projectSimilarToTennisOne\\projectSimilarToTennisOne\\Resources\\Temp\\ExcelRecordsFiles\\";
+        // Specify the path on the server to
+        // save the uploaded file to.
+        //String savePath = @"c:\temp\uploads\";
+
+        // Before attempting to perform operations
+        // on the file, verify that the FileUpload 
+        // control contains a file.
+        if (ExcelFileUpload.HasFile)
+        {
+            // Get the name of the file to upload.
+            String fileName = ExcelFileUpload.FileName;
+
+            // Append the name of the file to upload to the path.
+            string savePath = tempResourcesFolderPath + fileName;
+
+
+            // Call the SaveAs method to save the 
+            // uploaded file to the specified path.
+            // This example does not perform all
+            // the necessary error checking.               
+            // If a file with the same name
+            // already exists in the specified path,  
+            // the uploaded file overwrites it.
+            ExcelFileUpload.SaveAs(savePath);
+
+            // Notify the user of the name of the file
+            // was saved under.
+            UploadStatusLabel.Text = "Your file was saved as " + fileName;
+            backend.ReadExcel
+        }
+        else
+        {
+            // Notify the user that a file was not uploaded.
+            UploadStatusLabel.Text = "You did not specify a file to upload.";
+        }
     }
+
+
     #endregion
 
     #region Other view-related functions
@@ -76,9 +113,9 @@ public partial class _Default : Page
     /// <param name="table"></param>
     private void ResetTable(Table table)
     {
-        //TableRow headersRow = table.Rows[0];
-        //table.Rows.Clear();
-        //table.Rows.Add(headersRow);
+        TableRow headersRow = table.Rows[0];
+        table.Rows.Clear();
+        table.Rows.Add(headersRow);
     }
 
     /// <summary>
