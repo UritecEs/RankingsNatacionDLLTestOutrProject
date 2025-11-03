@@ -1,15 +1,7 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <!-- <link rel="stylesheet" href="Content/TailwindDatatableStyle.css" type="text/css" />
-        
-        <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.css" />
-        <script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
-        -->
-
-            
-        <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.css" />
-        <link rel="stylesheet" href="Content/bootstrap.css" />
+        <link rel="stylesheet" href="Content/bootstrap.css" type="text/css"/>
 
         <script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
 
@@ -39,7 +31,7 @@
 
      <label style="font-weight:bold;font-size:large">Eventos</label>
      <div style="overflow-y: auto; height: 300px; width: 100%; margin-bottom:20px;">
-          <asp:Table id="EventsTable" class="table table-striped table-scrollable" runat="server" CellPadding="10" GridLines="both" 
+          <asp:Table id="EventsTable" class="table table-striped" runat="server" CellPadding="10" GridLines="both" 
               HorizontalAlign="Justify" Width="100%">
               <asp:TableHeaderRow class="thead">
                  <asp:TableHeaderCell name="MeetName">Competición</asp:TableHeaderCell>
@@ -62,7 +54,7 @@
 
      <label style="font-weight:bold;font-size:large">Resultados de pruebas</label>
      <div style="overflow-y: auto; height: 300px; width: 100%; margin-bottom:20px;">
-          <asp:Table id="ResultsTable" class="dataTable table-striped" runat="server" CellPadding="10" GridLines="both" HorizontalAlign="Justify" Width="100%">
+          <asp:Table id="ResultsTable" class="table table-striped" runat="server" CellPadding="10" GridLines="both" HorizontalAlign="Justify" Width="100%">
               <asp:TableHeaderRow Font-Bold="true">
                  <asp:TableHeaderCell name="SplitDistance">Distancia recorrida</asp:TableHeaderCell>
                  <asp:TableHeaderCell name="SwimTime">Tiempo</asp:TableHeaderCell>
