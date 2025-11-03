@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClosedXML.Excel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
@@ -11,12 +12,13 @@ public partial class _Default : Page
 {
 
     private readonly string codeOfClub = "00300"; //ex.Tenis club Pamplona --> replace depending on the client where this DLL is implemented
-    private DataProcesser backend = new DataProcesser();
+    private testDLLrecordsNatacion.RankingsNatacionApi SwimRankingsApi = new testDLLrecordsNatacion.RankingsNatacionApi();
+    private string tempResourcesFolderPath = "C:\\Users\\crist\\source\\repos\\projectSimilarToTennisOne\\projectSimilarToTennisOne\\Resources\\Temp\\ExcelRecordsFiles\\";
 
     #region view control Events and function callers
     protected void Page_Load(object sender, EventArgs e)
     {
-        backend.ProcessXml(codeOfClub);
+        SwimRankingsApi.ProcessXml(codeOfClub);
         LoadTablesData();
     }
 
@@ -35,41 +37,19 @@ public partial class _Default : Page
     /// </summary>
     public void ImportExcel_Click(object sender, EventArgs args)
     {
-        string tempResourcesFolderPath = "C:\\Users\\crist\\source\\repos\\projectSimilarToTennisOne\\projectSimilarToTennisOne\\Resources\\Temp\\ExcelRecordsFiles\\";
-        // Specify the path on the server to
-        // save the uploaded file to.
-        //String savePath = @"c:\temp\uploads\";
-
-        // Before attempting to perform operations
-        // on the file, verify that the FileUpload 
-        // control contains a file.
         if (ExcelFileUpload.HasFile)
         {
-            // Get the name of the file to upload.
-            String fileName = ExcelFileUpload.FileName;
-
-            // Append the name of the file to upload to the path.
+            var file = ExcelFileUpload.FileContent;
+            string fileName = ExcelFileUpload.FileName;
             string savePath = tempResourcesFolderPath + fileName;
 
-
-            // Call the SaveAs method to save the 
-            // uploaded file to the specified path.
-            // This example does not perform all
-            // the necessary error checking.               
-            // If a file with the same name
-            // already exists in the specified path,  
-            // the uploaded file overwrites it.
             ExcelFileUpload.SaveAs(savePath);
-
-            // Notify the user of the name of the file
-            // was saved under.
-            UploadStatusLabel.Text = "Your file was saved as " + fileName;
-            backend.ReadExcel
+            List<Record> updatedRecords = SwimRankingsApi.ImportDataFromExcel(codeOfClub, savePath);
+            UploadStatusLabel.Text = "Excel file data imported successfully.";
         }
         else
         {
-            // Notify the user that a file was not uploaded.
-            UploadStatusLabel.Text = "You did not specify a file to upload.";
+            UploadStatusLabel.Text = "You did not specify an Excel file to upload.";
         }
     }
 
@@ -79,7 +59,7 @@ public partial class _Default : Page
     #region Other view-related functions
     private void LoadTablesData()
     {
-        Dictionary<string, object> allData = backend.FetchAllData();
+        Dictionary<string, object> allData = SwimRankingsApi.FetchAllData();
         List<Athlete> allAthletes = (dynamic) allData["Athletes"];
         List<Event> allEvents = (dynamic) allData["Events"];
         List<Result> allResults = (dynamic) allData["Results"];
