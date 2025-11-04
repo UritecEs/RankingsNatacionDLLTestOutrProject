@@ -18,7 +18,6 @@ public partial class _Default : Page
     #region view control Events and function callers
     protected void Page_Load(object sender, EventArgs e)
     {
-        SwimRankingsApi.ProcessXml(codeOfClub);
         LoadTablesData();
     }
 
@@ -26,9 +25,10 @@ public partial class _Default : Page
     /// called when the "PROCESAR XML" button is pressed.
     /// Calls function that reads xml and inserts the info of the atletes that belong to the club requesting the info
     /// </summary>
-    public void testInsert_Click(object sender, EventArgs args)
+    public void ImportXml_Click(object sender, EventArgs args)
     {
-        Page_Load(sender, args);
+        SwimRankingsApi.ProcessXml(codeOfClub);
+        Page_Load(sender, args); //reload page with updated information
     }
 
     /// <summary>
@@ -46,6 +46,7 @@ public partial class _Default : Page
             ExcelFileUpload.SaveAs(savePath);
             List<Record> updatedRecords = SwimRankingsApi.ImportDataFromExcel(codeOfClub, savePath);
             UploadStatusLabel.Text = "Excel file data imported successfully.";
+            LoadTablesData();
         }
         else
         {
@@ -63,10 +64,12 @@ public partial class _Default : Page
         List<Athlete> allAthletes = (dynamic) allData["Athletes"];
         List<Event> allEvents = (dynamic) allData["Events"];
         List<Result> allResults = (dynamic) allData["Results"];
+        List<Record> allRecords = (dynamic) allData["Records"];
 
         ResetTable(AthletesTable);
         ResetTable(EventsTable);
         ResetTable(ResultsTable);
+        ResetTable(RecordsTable);
  
         //Generate tables
         foreach (Athlete athlete in allAthletes)
@@ -83,6 +86,11 @@ public partial class _Default : Page
         {
             TableRow row = GenerateTableRowFromResult(result);
             ResultsTable.Rows.Add(row);
+        }
+        foreach (Record record in allRecords)
+        {
+              TableRow row = GenerateTableRowFromRecord(record);
+            RecordsTable.Rows.Add(row);
         }
 
     }
@@ -172,6 +180,33 @@ public partial class _Default : Page
 
             TableCell propertyCell = new TableCell();
             propertyCell.ID = $"cell_{attName}_{result.Id}";
+            propertyCell.Controls.Add(new LiteralControl(attValue));
+            row.Cells.Add(propertyCell);
+        }
+
+        return row;
+    }
+
+    /// <summary>
+    /// Generates a table row object to display all the object's attributes values 
+    /// in different cells, corresponding to the columns of the table 
+    /// </summary>
+    /// <param name="record">The Result that we want to describe the properties of</param>
+    /// <returns>TableRow with the described object data</returns>
+    private TableRow GenerateTableRowFromRecord(Record record)
+    {
+        TableRow row = new TableRow();
+        row.ID = $"row_{record.Id}";
+
+        Dictionary<string, string> properties = record.DescribePropertiesStr();
+        for (int i = 0; i < properties.Count; i++)
+        {
+            var att = properties.ElementAt(i);
+            string attName = att.Key;
+            string attValue = att.Value;
+
+            TableCell propertyCell = new TableCell();
+            propertyCell.ID = $"cell_{attName}_{record.Id}";
             propertyCell.Controls.Add(new LiteralControl(attValue));
             row.Cells.Add(propertyCell);
         }

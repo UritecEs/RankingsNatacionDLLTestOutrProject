@@ -9,7 +9,7 @@
     <h1>TEST TO DISPLAY INFORMATION</h1>
 
     <div style="margin-bottom:20px;">
-        <asp:button id="Button1" onclick="testInsert_Click" runat="server" Text="Procesar XML"></asp:button>
+        <asp:button id="Button1" onclick="ImportXml_Click" runat="server" Text="Procesar XML"></asp:button>
     </div>
 
     <div style="margin-bottom:20px;">
@@ -25,13 +25,15 @@
             <asp:Table id="RecordsTable" class="table table-striped" runat="server" CellPadding="10" GridLines="both" 
                 HorizontalAlign="Justify" Width="100%">
                 <asp:TableHeaderRow class="thead">
+                    <asp:TableHeaderCell name="RecordDate">Fecha</asp:TableHeaderCell>
                     <asp:TableHeaderCell name="Posicion">Posición</asp:TableHeaderCell>
-                    <asp:TableHeaderCell name="MeetStatus">Caracter</asp:TableHeaderCell>
+                    <asp:TableHeaderCell name="MeetStatus">Caracter de la competición</asp:TableHeaderCell>
                     <asp:TableHeaderCell name="RecordType">Tipo de record</asp:TableHeaderCell>
                     <asp:TableHeaderCell name="AgeCategory">Categoría de edad</asp:TableHeaderCell>
                     <asp:TableHeaderCell name="SwimTime">Tiempo de nado</asp:TableHeaderCell>
                     <asp:TableHeaderCell name="SwimCourse">Recorrido de nado</asp:TableHeaderCell>
                     <asp:TableHeaderCell name="SwimDistance">Distancia de nado</asp:TableHeaderCell>
+                    <asp:TableHeaderCell name="SwimStroke">Estilo de nado</asp:TableHeaderCell>
                     <asp:TableHeaderCell name="Points">Puntos (FINA)</asp:TableHeaderCell>
                 </asp:TableHeaderRow>
             </asp:Table>
