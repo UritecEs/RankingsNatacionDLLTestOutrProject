@@ -363,6 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 /projectSimilarToTennisOne/Logs/*
-/projectSimilarToTennisOne/Resources/Temp/ExcelRecordsFiles/recordsClub__Listado_de_Marcas p25.xlsx
-/projectSimilarToTennisOne/Resources/Temp/ExcelRecordsFiles/recordsClub__Listado_de_Marcas p25.xlsx
-/projectSimilarToTennisOne/Resources/Temp/ExcelRecordsFiles/recordsClub__Listado_de_Marcas p25.xlsx
+/projectSimilarToTennisOne/Resources/Temp/*
