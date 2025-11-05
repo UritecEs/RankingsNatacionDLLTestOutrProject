@@ -51,6 +51,7 @@ public partial class _Default : Page
         else
         {
             UploadStatusLabel.Text = "You did not specify an Excel file to upload.";
+            SwimRankingsApi.InsertarRecordsEsp();
         }
     }
 
